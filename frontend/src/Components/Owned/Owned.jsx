@@ -5,6 +5,7 @@ import { useQuery } from 'urql'
 import OwnedCard from './OwnedCard'
 import './owned.css'
 import { ethers } from 'ethers'
+import NoArts from './NoArts'
 
 const OwnedQuery = (owner_address) => {
   return `
@@ -80,13 +81,17 @@ const Owned = () => {
             <SkeletonCard/>
           </>}
           {result.error && <div>Some error Occured</div>}
-          {!result.fetching && !result.error && result.data.arts.map((art, index) => (
+          {!result.fetching && !result.error && result.data.arts.length!=0 ? result.data.arts.map((art, index) => (
             <OwnedCard
               key={index}
               art={art}
               setSelectedNFT={setSelectedNFT}
             />
-        ))
+        )) : (
+          <>
+          <NoArts/>
+          </>
+        )
         }
         </div>
       </div>
