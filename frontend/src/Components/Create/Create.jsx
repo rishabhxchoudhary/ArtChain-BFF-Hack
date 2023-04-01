@@ -9,6 +9,7 @@ import { useStateContext } from '../../Contexts/Context';
 const Create = () => {
   const { contract } = useStateContext()
   const [fileUrl, setFileUrl] = useState(null);
+  const [loading,setLoading] = useState(false);
   const [image, setImage] = useState(null);
   const [formInput, setFormInput] = useState({
     nftName: '',
@@ -43,8 +44,22 @@ const Create = () => {
 
   async function handleSubmit (e){
     e.preventDefault();
+    // setLoading(true);
     // const formData = new FormData();
     // formData.append("file", (image));
+    // const resFile = await axios({
+    //   method: 'post',
+    //   url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+    //   data: formData,
+    //   headers: {
+    //     pinata_api_key: "75785b3aaf46e34333df",
+    //     pinata_secret_api_key:"644c90c3943e14ae63b78fbe7ae7f23c698734bceb79c35bbe0edb04d3579af9",
+    //     "Content-Type": `multipart/form-data`,}
+    // })
+    // console.log(resFile);
+    // const ImgHash = `ipfs://${resFile.data.IpfsHash}/${resFile.data.PinSize}`;
+    // console.log(ImgHash);
+
     // const metadata = JSON.stringify({
     //   "name": formInput.nftName,
     //   "description": formInput.description,
@@ -67,6 +82,8 @@ const Create = () => {
     // } catch (error) {
     //   console.log(error.response.data);
     // }
+    // setLoading(false);
+    setLoading(true)
     const client = new NFTStorage({ token: process.env.REACT_APP_NFT_STORAGE_API });
     const metadata = await client.store({
       name: formInput.nftName,
@@ -78,7 +95,7 @@ const Create = () => {
     const transaction = await contract.createArt(metadata.url)
     await transaction.wait();
     alert('Your NFT has been created!');
-
+    setLoading(false);
   }
   return (
     <div className="flex justify-center sm:px-4 p-12 mt-10 mx-auto w-[80%]">
@@ -146,11 +163,8 @@ const Create = () => {
             />
 
             <div className="mt-4 w-full flex justify-end">
-              {/* <button className="text-white bg-slate-300 rounded-xl">
-                CreateNft
-              </button> */}
-              <button onClick={handleSubmit} class="group rounded-2xl h-12 w-48 bg-purple-500 font-bold text-lg text-white relative overflow-hidden">
-                Create
+              <button disabled={loading} onClick={handleSubmit} class="group rounded-2xl h-12 w-48 bg-purple-500 font-bold text-lg text-white relative overflow-hidden">
+                {loading? "Transaction in progress" : "Create"}
                 <div class="absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl"></div>
               </button>
             </div>
