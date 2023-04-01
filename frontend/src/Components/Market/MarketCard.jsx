@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
 import { useStateContext } from '../../Contexts/Context';
+import axios from 'axios';
 
 const Card = ({ art  }) => {
   const { contract } = useStateContext()
@@ -14,11 +15,11 @@ const Card = ({ art  }) => {
     const uri = 'https://ipfs.io/ipfs/' + art.tokenURI.slice(7)
     async function getUsers() {
       setLoading(true)
+      console.log(uri)
       try {
-        const response = await fetch(uri, {
-          method: 'GET',
-        })
-        const json = await response.json()
+        const response = await axios.get(uri)
+        const json = await response.data
+        // console.log(json)
         setName(json.name)
         setDescription(json.description)
         const img_url = 'https://ipfs.io/ipfs/' + json.image.slice(7)
