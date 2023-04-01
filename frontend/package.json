@@ -13,6 +13,8 @@
     "nft.storage": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-frontend": "^1.0.0-security",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
     "urql": "^3.0.4",
