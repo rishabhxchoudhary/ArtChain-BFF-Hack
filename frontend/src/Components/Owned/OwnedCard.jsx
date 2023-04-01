@@ -7,7 +7,7 @@ const OwnedCard = ({ art , setSelectedNFT }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const uri = 'https://ipfs.io/ipfs/' + art.tokenURI.slice(7)
+    const uri = 'https://dweb.link/ipfs/' + art.tokenURI.slice(7)
     async function getUsers() {
       setLoading(true)
       try {
@@ -17,7 +17,7 @@ const OwnedCard = ({ art , setSelectedNFT }) => {
         const json = await response.json()
         setName(json.name)
         setDescription(json.description)
-        const img_url = 'https://ipfs.io/ipfs/' + json.image.slice(7)
+        const img_url = 'https://dweb.link/ipfs/' + json.image.slice(7)
         setImage(img_url)
       } catch (error) {
         console.error(error)

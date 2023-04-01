@@ -1,25 +1,26 @@
-import React, { useState, useCallback, useMemo } from 'react';
-import { useDropzone } from 'react-dropzone';
-import upload from '../../Assets/upload.png';
-import Input from './Input';
-import axios from 'axios';
-import { File, NFTStorage } from "nft.storage";
-import { useStateContext } from '../../Contexts/Context';
+import React, { useState, useCallback, useMemo } from 'react'
+import { useDropzone } from 'react-dropzone'
+import upload from '../../Assets/upload.png'
+import Input from './Input'
+import axios from 'axios'
+import { File, NFTStorage } from 'nft.storage'
+import { useStateContext } from '../../Contexts/Context'
 
 const Create = () => {
   const { contract } = useStateContext()
-  const [fileUrl, setFileUrl] = useState(null);
-  const [image, setImage] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [image, setImage] = useState(null)
   const [formInput, setFormInput] = useState({
     nftName: '',
     description: '',
     yourName: '',
-  });
+  })
 
   const onDrop = useCallback((acceptedFile) => {
-    setImage(acceptedFile[0]);
-    console.log(acceptedFile);
-  }, []);
+    setImage(acceptedFile[0])
+    console.log(acceptedFile)
+  }, [])
   const {
     getRootProps,
     getInputProps,
@@ -30,21 +31,35 @@ const Create = () => {
     onDrop,
     accept: 'image/*',
     maxSize: 5000000,
-  });
-  console.log(formInput);
+  })
+  console.log(formInput)
   const fileStyle = useMemo(
     () =>
       `border flex flex-col items-center p-10 rounded-sm border-dashed m-10
       ${isDragActive && 'border-black'}},
       ${isDragAccept && 'border-gray-500'}}
       ${isDragReject && 'border-gray-500'}} bg-card-dark`,
-    []
-  );
+    [],
+  )
 
-  async function handleSubmit (e){
-    e.preventDefault();
+  async function handleSubmit(e) {
+    e.preventDefault()
+    // setLoading(true);
     // const formData = new FormData();
     // formData.append("file", (image));
+    // const resFile = await axios({
+    //   method: 'post',
+    //   url: 'https://api.pinata.cloud/pinning/pinFileToIPFS',
+    //   data: formData,
+    //   headers: {
+    //     pinata_api_key: "75785b3aaf46e34333df",
+    //     pinata_secret_api_key:"644c90c3943e14ae63b78fbe7ae7f23c698734bceb79c35bbe0edb04d3579af9",
+    //     "Content-Type": `multipart/form-data`,}
+    // })
+    // console.log(resFile);
+    // const ImgHash = `ipfs://${resFile.data.IpfsHash}/${resFile.data.PinSize}`;
+    // console.log(ImgHash);
+
     // const metadata = JSON.stringify({
     //   "name": formInput.nftName,
     //   "description": formInput.description,
@@ -53,7 +68,7 @@ const Create = () => {
     // formData.append('pinataMetadata', metadata);
     // try{
     //   const res = await axios.post("https://api.pinata.cloud/pinning/pinFileToIPFS", formData, {
-    //     maxContentLength: 'Infinity', 
+    //     maxContentLength: 'Infinity',
     //     headers: {
     //       'pinata_api_key': "75785b3aaf46e34333df",
     //       'pinata_secret_api_key': "644c90c3943e14ae63b78fbe7ae7f23c698734bceb79c35bbe0edb04d3579af9",
@@ -67,18 +82,23 @@ const Create = () => {
     // } catch (error) {
     //   console.log(error.response.data);
     // }
-    const client = new NFTStorage({ token: process.env.REACT_APP_NFT_STORAGE_API });
+    // setLoading(false);
+    setLoading(true)
+    const client = new NFTStorage({
+      token: process.env.REACT_APP_NFT_STORAGE_API,
+    })
     const metadata = await client.store({
       name: formInput.nftName,
       description: formInput.description,
-      creator : formInput.yourName,
+      creator: formInput.yourName,
       image: new File([image], `${formInput.name}.jpg`, { type: 'image/jpg' }),
-    });
-    
-    const transaction = await contract.createArt(metadata.url)
-    await transaction.wait();
-    alert('Your NFT has been created!');
+    })
 
+    const transaction = await contract.createArt(metadata.url)
+    await transaction.wait()
+    alert('Your NFT has been created!')
+    setLoading(false)
+    window.location.reload()
   }
   return (
     <div className="flex justify-center sm:px-4 p-12 mt-10 mx-auto w-[80%]">
@@ -96,17 +116,30 @@ const Create = () => {
                   JPG, PNG, GIF
                 </p>
                 <div className="my-12 w-full flex justify-center">
-                  <img
-                    src={upload}
-                    className="h-[100px] w-[100px] object-conatain invert"
-                  />
+                  {image ? (
+                    <>
+                      <img
+                        src={URL.createObjectURL(image)}
+                        className="object-conatain invert"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <img
+                        src={upload}
+                        className="h-[100px] w-[100px] object-conatain invert"
+                      />
+                    </>
+                  )}
                 </div>
                 <p className="font-semibold text-xl text-white">
-                  Drag and drop a file
+                  {image ? 'Change Image' : 'Drag and drop a file'}
                 </p>
-                <p className="font-semibold text-xl text-white">
-                  Or browse a media on the device
-                </p>
+                {!image && (
+                  <p className="font-semibold text-xl text-white">
+                    Or browse a media on the device
+                  </p>
+                )}
               </div>
               <div>
                 {fileUrl && (
@@ -146,11 +179,12 @@ const Create = () => {
             />
 
             <div className="mt-4 w-full flex justify-end">
-              {/* <button className="text-white bg-slate-300 rounded-xl">
-                CreateNft
-              </button> */}
-              <button onClick={handleSubmit} class="group rounded-2xl h-12 w-48 bg-purple-500 font-bold text-lg text-white relative overflow-hidden">
-                Create
+              <button
+                disabled={loading}
+                onClick={handleSubmit}
+                class="group rounded-2xl h-12 w-48 bg-purple-500 font-bold text-lg text-white relative overflow-hidden"
+              >
+                {loading ? 'Transaction in progress' : 'Create'}
                 <div class="absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl"></div>
               </button>
             </div>
@@ -158,10 +192,10 @@ const Create = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Create;
+export default Create
 
 // import React, { useRef, useState } from 'react';
 // import { File, NFTStorage } from "nft.storage";
