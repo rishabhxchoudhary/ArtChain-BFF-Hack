@@ -114,12 +114,14 @@ function Navbar() {
                     </span>
                   </div>
                 ) : (
-                  <button
-                    onClick={connectionHandler}
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg"
-                  >
-                    Connect Metamask
-                  </button>
+                  <div className="lg:pl-96">
+                    <button
+                      onClick={connectionHandler}
+                      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg translate-x-56"
+                    >
+                      Connect Metamask
+                    </button>
+                  </div>
                 )}
               </div>
             </div>
