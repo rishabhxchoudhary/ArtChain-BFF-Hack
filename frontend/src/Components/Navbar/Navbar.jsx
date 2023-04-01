@@ -103,16 +103,18 @@ function Navbar() {
                     Connecting...
                   </button>
                 ) : account ? (
-                  <div className="text-white flex items-center gap-1 font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg">
-                    <img
-                      src={`https://avatars.dicebear.com/api/bottts/${account}.svg`}
-                      className="h-[30px] w-[30px]"
-                      alt="Avatar"
-                    />
-                    <span className="navbar-account-address">
-                      {account.slice(0, 6)}...{account.slice(-4)}
-                    </span>
-                  </div>
+                  <Link to={`/profile/${account}`}>
+                    <div className="text-white flex items-center gap-1 font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg">
+                      <img
+                        src={`https://avatars.dicebear.com/api/bottts/${account}.svg`}
+                        className="h-[30px] w-[30px]"
+                        alt="Avatar"
+                      />
+                      <span className="navbar-account-address">
+                        {account.slice(0, 6)}...{account.slice(-4)}
+                      </span>
+                    </div>
+                  </Link>
                 ) : (
                   <div className="lg:pl-96">
                     <button

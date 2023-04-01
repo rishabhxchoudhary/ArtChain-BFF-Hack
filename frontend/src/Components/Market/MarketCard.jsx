@@ -1,9 +1,10 @@
-import { ethers } from 'ethers';
-import React, { useEffect, useState } from 'react';
-import { useStateContext } from '../../Contexts/Context';
-import axios from 'axios';
+import { ethers } from 'ethers'
+import React, { useEffect, useState } from 'react'
+import { useStateContext } from '../../Contexts/Context'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-const Card = ({ art  }) => {
+const Card = ({ art }) => {
   const { contract } = useStateContext()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -12,6 +13,7 @@ const Card = ({ art  }) => {
   const [loading2, setLoading2] = useState(false)
 
   useEffect(() => {
+    console.log(art)
     const uri = 'https://dweb.link/ipfs/' + art.tokenURI.slice(7)
     async function getUsers() {
       setLoading(true)
@@ -32,17 +34,19 @@ const Card = ({ art  }) => {
     getUsers()
   }, [art.tokenURI])
 
-    const handleSubmit = async () => {
-        setLoading2(true);
-        try{
-          const transaction = await contract.buyArt(art.id, {value: (art.price)});
-          await transaction.wait();
-          alert("Art has been bought successfully")
-          window.location.reload();
-        }
-        catch(err){ alert(err.stack); console.log(err);}
-        setLoading2(false);
+  const handleSubmit = async () => {
+    setLoading2(true)
+    try {
+      const transaction = await contract.buyArt(art.id, { value: art.price })
+      await transaction.wait()
+      alert('Art has been bought successfully')
+      window.location.reload()
+    } catch (err) {
+      alert(err.stack)
+      console.log(err)
     }
+    setLoading2(false)
+  }
 
   return (
     <>
@@ -78,20 +82,27 @@ const Card = ({ art  }) => {
             <div className="px-6 py-4 h-[180px] overflow-scroll scrollbar-hide">
               <div className="font-bold text-xl mb-2 ">{name}</div>
               <p className="text-base mb-4">{description}</p>
-              <p className="text-base mb-4">Price: {ethers.utils.formatEther(art.price)} Eth</p>
+              <Link to={`/profile/${art.from}`}>
+                <p className="text-base mb-4">Owner : {art.from}</p>
+              </Link>
+              <p className="text-base mb-4">
+                Price: {ethers.utils.formatEther(art.price)} Eth
+              </p>
             </div>
             <div className="px-6 pt-4 pb-2">
-              <button disabled={loading2} onClick={handleSubmit} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg">
-                {loading2 ? "Buying.." : "Buy"}
+              <button
+                disabled={loading2}
+                onClick={handleSubmit}
+                className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg"
+              >
+                {loading2 ? 'Buying..' : 'Buy'}
               </button>
             </div>
           </div>
         </div>
       )}
-
     </>
   )
 }
 
 export default Card
-
