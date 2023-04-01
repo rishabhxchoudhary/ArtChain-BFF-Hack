@@ -1,0 +1,128 @@
+.footer{
+    font-family: 'Satoshi', sans-serif;
+    color: rgb(215, 209, 209);
+    background: rgb(13,19,24);
+    background: linear-gradient(90deg, rgba(13,19,24,1) 0%, rgba(23,41,59,1) 59%, rgba(15,43,73,1) 100%);
+}
+
+.logo{
+    text-align: center;
+}
+
+.text{
+    font-weight: 600;
+}
+
+.socials{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.title{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.eth, .eth a{
+    color: rgb(215, 209, 209);
+    text-decoration: none;
+    font-size: small;
+}
+
+.mm, .mm a, .nft, .nft a, .blockchain, .blockchain a, .faq, .faq a{
+    padding: 10px 0 0 0;
+    color: rgb(215, 209, 209);
+    text-decoration: none;
+    font-size: small;
+}
+ 
+.subscribe-box {
+	 text-align: center;
+}
+
+.subscribe-box h2 {
+	 margin: 0 0 0.5em;
+}
+
+.subscribe-box .subscribe {
+	 max-width: 600px;
+}
+
+.subscribe-box .subscribe input {
+	 width: 80%;
+	 background: transparent;
+	 border: 0;
+	 border-bottom: 1px solid;
+	 padding: 1px 0 0.8em;
+	 text-align: center;
+	 font-size: 15px;
+	 font-weight: 300;
+	 line-height: 1.5;
+	 color: inherit;
+	 outline: none;
+}
+
+.subscribe-box .subscribe input::placeholder {
+	 color: rgba(255, 255, 255, 0.5);
+}
+
+.subscribe-box .subscribe button {
+	 all: unset;
+	 margin-top: 2.1em;
+	 background: transparent;
+	 border: 2px solid white;
+	 padding: 1em 2.5em;
+	 border-radius: 50px;
+	 cursor: pointer;
+	 display: inline-block;
+	 font-weight: 700;
+	 position: relative;
+	 transition: all 300ms ease;
+}
+
+.subscribe-box .subscribe button span {
+	 display: inline-block;
+	 transition: all 300ms ease;
+}
+
+.subscribe-box .subscribe button:before, .subscribe-box .subscribe button:after {
+	 content: "";
+	 display: block;
+	 position: absolute;
+	 transition: all 300ms ease;
+	 opacity: 0;
+}
+
+.subscribe-box .subscribe button:before{
+	 height: 7px;
+	 width: 7px;
+	 background: transparent;
+	 border-right: 2px solid;
+	 border-top: 2px solid;
+	 right: 30px;
+	 top: 23px;
+	 transform: rotate(45deg);
+}
+
+.subscribe-box .subscribe button:after {
+	 background: white;
+	 height: 2px;
+	 width: 65px;
+	 left: 0;
+	 top: 1.6em;
+}
+
+.subscribe-box .subscribe button:hover span {
+	 transform: translateX(-10px);
+}
+
+.subscribe-box .subscribe button:hover:before {
+	 opacity: 1;
+}
+
+.subscribe-box .subscribe button:hover:after {
+	 width: 12px;
+	 opacity: 0.7;
+	 transform: translateX(114px);
+}

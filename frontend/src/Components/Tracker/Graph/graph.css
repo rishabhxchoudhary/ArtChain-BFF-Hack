@@ -1,0 +1,42 @@
+.highcharts-container {
+  width: 50%;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.highcharts-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.highcharts-yaxis-title {
+  font-size: 16px;
+  font-weight: bold;
+  transform: rotate(-90deg);
+  text-align: center;
+  margin-left: -40px;
+}
+
+.highcharts-tooltip {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  color: #333;
+}
+
+.highcharts-tooltip span {
+  font-weight: bold;
+  color: #000;
+}
+
+.highcharts-series-0 {
+  fill-opacity: 0;
+  stroke-width: 2;
+}
+
+.highcharts-series-0 path {
+  stroke: #2196f3;
+}
