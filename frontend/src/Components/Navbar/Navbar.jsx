@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import logo from '../../Assets/logo.png'
-import { useStateContext } from '../../Contexts/Context'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import logo from '../../Assets/logo.png';
+import { useStateContext } from '../../Contexts/Context';
 
 function Navbar() {
-  const { account, connectAccounts } = useStateContext()
-  const [isConnecting, setIsConnecting] = useState(false)
-  const navigate = useNavigate()
+  const { account, connectAccounts } = useStateContext();
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [searchAddress, setSearchAddress] = useState('');
+  const navigate = useNavigate();
   const connectionHandler = async () => {
-    setIsConnecting(true)
-    await connectAccounts()
-    setIsConnecting(false)
-    navigate('/')
-  }
+    setIsConnecting(true);
+    await connectAccounts();
+    setIsConnecting(false);
+    navigate('/');
+  };
   return (
     <nav className="bg-gray-900 shadow-lg fixed top-0 left-0 right-0 z-30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -82,6 +83,12 @@ function Navbar() {
                       type="text"
                       className="bg-gray-700 rounded-lg text-sm focus:outline-none focus:ring-2 outline-0 placeholder-gray-400 pl-10 pr-3 py-3 w-64"
                       placeholder="Search"
+                      value={searchAddress}
+                      onChange={(e) => {
+                        setSearchAddress(e.target.value);
+                        if (e.target.value)
+                          navigate(`/profile/${e.target.value}`);
+                      }}
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center justify-center pl-3">
                       <svg
@@ -132,6 +139,6 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  )
+  );
 }
-export default Navbar
+export default Navbar;
