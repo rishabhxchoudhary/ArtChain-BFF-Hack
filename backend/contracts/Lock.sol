@@ -15,7 +15,7 @@ contract ArtChain is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
     using SafeMath for uint256;
     Counters.Counter private _tokenIDs;
-    mapping(uint256 => DigitalArt) private _listings;
+    mapping(uint256 => DigitalArt) public _listings;
 
     constructor() ERC721("Art Marketplace", "DigiArt") {}
 
