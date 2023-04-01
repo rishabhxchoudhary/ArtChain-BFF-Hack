@@ -1,36 +1,36 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("NFTMarket", function () {
-  let nftMarket;
+describe("ArtChain", function () {
+  let artchain;
   let signer;
   let otherSigner;
   before(async ()=> {
-    const NFTMarket = await ethers.getContractFactory("ArtChain");
-    nftMarket = await NFTMarket.deploy();
-    await nftMarket.deployed();
+    const ArtChain = await ethers.getContractFactory("ArtChain");
+    const artchain = await ArtChain.deploy();
+    await artchain.deployed();
     [signer,otherSigner] = await ethers.getSigners();
   });
 
-  const createNFT = async (tokenURI)=>{
-    const transaction = await nftMarket.createNFT(tokenURI);
+  const createArt = async (tokenURI)=>{
+    const transaction = await nftMarket.createArt(tokenURI);
     const receipt = await transaction.wait();
     const tokenID = receipt.events[0].args.tokenId;
     return tokenID;
   }
 
-  const createAndListNFT = async (price)=>{
-    const tokenID = await createNFT("some token uri");
-    const transaction = await nftMarket.listNFT(tokenID,price);
+  const createAndListArt = async (price)=>{
+    const tokenID = await createArt("some token uri");
+    const transaction = await nftMarket.listArt(tokenID,price);
     await transaction.wait();
     return tokenID;
   }
 
-  describe("createNFT",async function(){
+  describe("createArt",async function(){
     const tokenURI = "https://some-token.uri";
-    it("Should create NFT with correct owner and tokenURI",async ()=>{
+    it("Should create Art with correct owner and tokenURI",async ()=>{
       // Call the create NFT Function
-      const transaction = await nftMarket.createNFT(tokenURI);
+      const transaction = await nftMarket.createArt(tokenURI);
       const receipt = await transaction.wait();
       const tokenID = receipt.events[0].args.tokenId;
 

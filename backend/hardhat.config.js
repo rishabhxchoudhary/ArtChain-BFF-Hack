@@ -7,7 +7,7 @@ const { POLYGON_MUMBAI_RPC_PROVIDER, PRIVATE_KEY, POLYGONSCAN_API_KEY } = proces
 
 module.exports = {
   solidity: "0.8.18",
-  defaultNetwork: "mumbai",
+//   defaultNetwork: "mumbai",
   networks: {
       hardhat: {},
       mumbai: {
