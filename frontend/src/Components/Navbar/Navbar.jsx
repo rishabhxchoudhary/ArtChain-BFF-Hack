@@ -58,7 +58,7 @@ function Navbar() {
                 </>
               ) : (
                 <>
-                  <Link
+                  {/* <Link
                     to="/"
                     className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
@@ -69,7 +69,7 @@ function Navbar() {
                     className="hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Ethereum Tracker
-                  </Link>
+                  </Link> */}
                 </>
               )}
             </div>
@@ -106,7 +106,7 @@ function Navbar() {
                   </div>
                 )}
                 {isConnecting ? (
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg">
+                  <button className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg translate-x-56">
                     Connecting...
                   </button>
                 ) : account ? (
@@ -126,7 +126,7 @@ function Navbar() {
                   <div className="lg:pl-96">
                     <button
                       onClick={connectionHandler}
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg translate-x-56"
+                      className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg translate-x-56"
                     >
                       Connect Metamask
                     </button>

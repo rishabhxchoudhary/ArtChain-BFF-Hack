@@ -1,11 +1,11 @@
-import React from 'react'
-import './Hero.css'
-import arthome from '../../../Assets/arthome.jpg'
+import React from 'react';
+import './Hero.css';
+import arthome from '../../../Assets/arthome.jpg';
 
 const Hero = () => {
   return (
     <>
-      <div class="home container flex h-screen items-center scale-125">
+      <div class="home container flex h-screen items-center">
         <div class="left">
           <h1 class="rainbow-text font-black">The</h1>
           <h1 class="rainbow-text font-black">ArtChain</h1>
@@ -22,7 +22,7 @@ const Hero = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

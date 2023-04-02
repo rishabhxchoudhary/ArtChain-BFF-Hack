@@ -1,5 +1,5 @@
-import React from 'react'
-import './ContactUs.css'
+import React from 'react';
+import './ContactUs.css';
 
 const ContactUs = () => {
   return (
@@ -40,9 +40,19 @@ const ContactUs = () => {
                   <div class="app-form-group message">
                     <input class="app-form-control" placeholder="MESSAGE" />
                   </div>
-                  <div class="app-form-group buttons">
-                    <button class="app-form-button">CANCEL</button>
-                    <button class="app-form-button">SEND</button>
+                  <div class="app-form-group buttons" className="flex gap-5">
+                    <button
+                      class="app-form-button"
+                      className="bg-black rounded-md p-2"
+                    >
+                      CANCEL
+                    </button>
+                    <button
+                      class="app-form-button"
+                      className="bg-black rounded-md p-2"
+                    >
+                      SEND
+                    </button>
                   </div>
                 </div>
               </div>
@@ -51,7 +61,7 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;

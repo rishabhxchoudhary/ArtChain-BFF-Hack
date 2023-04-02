@@ -1,5 +1,5 @@
-import React from 'react'
-import './HowItHelps.css'
+import React from 'react';
+import './HowItHelps.css';
 
 const HowItHelps = () => {
   return (
@@ -16,31 +16,34 @@ const HowItHelps = () => {
         <a class="card1" href="#">
           <h3>ENCOURAGE</h3>
           <p class="small">
-            We encourage digital content creators to come forward and showcase
-            their art by createing NFTs.
+            ArtChain can also help to encourage creativity and innovation in the
+            art world by providing a new outlet for artists to create and sell
+            their work. ArtChain can help to encourage artists to push
+            boundaries and explore new styles and mediums.
           </p>
         </a>
         <a class="card1" href="#">
           <h3>FUNDING</h3>
           <p class="small">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-            at assumenda accusantium incidunt quidem? Ea praesentium nobis illo
-            facere? Cumque dolorem quas similique soluta facere perferendis eius
-            commodi, est laboriosam!{' '}
+            We're a community of artists and art lovers who are passionate about
+            supporting the arts. We provide a platform for artists to connect
+            with their fans and build their following, while also giving buyers
+            the opportunity to discover new and exciting artists.{' '}
           </p>
         </a>
         <a class="card1" href="#">
-          <h3>HAHAA</h3>
+          <h3>TRUST</h3>
           <p class="small">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-            at assumenda accusantium incidunt quidem? Ea praesentium nobis illo
-            facere? Cumque dolorem quas similique soluta facere perferendis eius
-            commodi, est laboriosam!
+            The use of blockchain technology can help to promote transparency
+            and fairness in the art market. ArtChain also helps to build trust
+            between buyers and sellers, which can be especially important in the
+            art world where authenticity and provenance are often major
+            concerns.
           </p>
         </a>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default HowItHelps
+export default HowItHelps;
