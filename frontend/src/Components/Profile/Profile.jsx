@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import Card from './Card';
-import SkeletonCard from '../SkeletonCard/SkeletonCard';
-import { useStateContext } from '../../Contexts/Context';
-import { useQuery } from 'urql';
-import { useParams } from 'react-router-dom';
-import art from '../../Assets/art.jpg';
-import { ethers } from 'ethers';
+import React, { useState } from 'react'
+import Card from './Card'
+import SkeletonCard from '../SkeletonCard/SkeletonCard'
+import { useStateContext } from '../../Contexts/Context'
+import { useQuery } from 'urql'
+import { useParams } from 'react-router-dom'
+import art from '../../Assets/art.jpg'
+import { ethers } from 'ethers'
 
 const MarketQuery = (owner_address) => {
   return `
@@ -18,8 +18,8 @@ const MarketQuery = (owner_address) => {
         price
       }
     }
-  `;
-};
+  `
+}
 
 const OwnedQuery = (owner_address) => {
   return `
@@ -32,48 +32,52 @@ const OwnedQuery = (owner_address) => {
         price
       }
     }
-  `;
-};
+  `
+}
 
 async function handleTransaction(to, val) {
-  const provider = window.ethereum;
+  const provider = window.ethereum
   if (provider) {
     // Use MetaMask provider
-    const ethersProvider = new ethers.providers.Web3Provider(provider);
-    const signer = ethersProvider.getSigner();
-    const value = ethers.utils.parseEther(val); // Replace with the amount to send
+    const ethersProvider = new ethers.providers.Web3Provider(provider)
+    const signer = ethersProvider.getSigner()
+    const value = ethers.utils.parseEther(val) // Replace with the amount to send
     const transaction = {
       to: to,
       value: value,
-    };
-    const result = await signer.sendTransaction(transaction);
-    console.log(result);
+    }
+    const result = await signer.sendTransaction(transaction)
+    console.log(result)
   } else {
-    console.error('Please install MetaMask!');
+    console.error('Please install MetaMask!')
   }
 }
 
 const Profile = () => {
-  const { account } = useStateContext();
-  const state = useParams();
-  const [amount, setAmount] = useState(0);
+  const { account } = useStateContext()
+  const state = useParams()
+  const [amount, setAmount] = useState(0)
   const [result, reexecuteQuery] = useQuery({
     query: MarketQuery(state.address),
-  });
-  const [ownedNft, _] = useQuery({
+  })
+  const [ownedNft, setOwnedNft_] = useQuery({
     query: OwnedQuery(state.address),
-  });
+  })
   const handleDonate = (e) => {
-    e.preventDefault();
-    handleTransaction(state.address, amount);
-  };
+    e.preventDefault()
+    handleTransaction(state.address, amount)
+  }
 
   return (
     <>
       <div>
         <div className="flex justify-center mt-[100px] flex-col items-center">
-          <img src={art} className="w-[100px] h-[100px] rounded-full border" />
-          <h2>{account}</h2>
+          <img
+            src={`https://avatars.dicebear.com/api/bottts/${state.address}.svg`}
+            className="w-[100px] h-[100px] rounded-full border"
+            alt=""
+          />
+          <h2>{state.address}</h2>
         </div>
         <div className="mt-[20px] flex flex-col p-4 rounded-[10px] w-[50%] m-auto">
           <p className="font-epilogue fount-medium text-[20px] leading-[30px] text-center text-[#808191]">
@@ -173,7 +177,7 @@ const Profile = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
