@@ -2,48 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    background-color: rgb(13,17,23);
-    color: #CCDAE7;
+.navRight {
+  justify-content: flex-end !important;
 }
 
-.skeletontext-head{
-    height: 25px;
-    width: 66%;
-    margin-bottom: 10px;
+body {
+  background-color: rgb(13, 17, 23);
+  color: #ccdae7;
 }
 
-.skeletontext{
-    height: 20px;
-    width: 100%;
-    margin-bottom: 10px;
+.skeletontext-head {
+  height: 25px;
+  width: 66%;
+  margin-bottom: 10px;
 }
 
-.skeletontext:last-child{
-    height: 20px;
-    width: 80%;
-    margin-bottom: 10px;
+.skeletontext {
+  height: 20px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.skeleton{
-    animation: skeleton-loading 1s linear infinite alternate;
+.skeletontext:last-child {
+  height: 20px;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.skeleton {
+  animation: skeleton-loading 1s linear infinite alternate;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* For IE, Edge and Firefox */
 .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 @keyframes skeleton-loading {
-    0%{
-        background-color: rgba(39, 57, 76, 0.3);
-    }
-    100%{
-        background-color:  rgba(56, 64, 72, 0.7);
-    }
+  0% {
+    background-color: rgba(39, 57, 76, 0.3);
+  }
+  100% {
+    background-color: rgba(56, 64, 72, 0.7);
+  }
 }
