@@ -96,9 +96,9 @@ function Navbar() {
               <div className="lg:pl-96">
                 <button
                   onClick={connectionHandler}
-                  className="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg"
+                  className="bg-gradient-to-r text-base sm:text-lg from-pink-500 via-red-500 to-yellow-500 text-black font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg"
                 >
-                  Connect Metamask
+                  Connect Wallet
                 </button>
               </div>
             )}
