@@ -1,6 +1,6 @@
-import React from 'react';
-import './Hero.css';
-import arthome from '../../../Assets/arthome.jpg';
+import React from 'react'
+import './Hero.css'
+import arthome from '../../../Assets/arthome.jpg'
 
 const Hero = () => {
   return (
@@ -17,12 +17,12 @@ const Hero = () => {
             purcase the token of their choice
           </p>
         </div>
-        <div class="right">
+        <div class="right hidden sm:block">
           <img className="" src={arthome} alt="" />
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Hero;
+export default Hero

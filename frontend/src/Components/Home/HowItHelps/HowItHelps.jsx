@@ -1,5 +1,5 @@
-import React from 'react';
-import './HowItHelps.css';
+import React from 'react'
+import './HowItHelps.css'
 
 const HowItHelps = () => {
   return (
@@ -12,7 +12,7 @@ const HowItHelps = () => {
           </span>
         </h1>
       </div>
-      <div class="bankai flex m-10 gap-20">
+      <div class="bankai flex m-10 gap-20 flex-col items-center md:flex-row">
         <a class="card1" href="#">
           <h3>ENCOURAGE</h3>
           <p class="small">
@@ -43,7 +43,7 @@ const HowItHelps = () => {
         </a>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default HowItHelps;
+export default HowItHelps

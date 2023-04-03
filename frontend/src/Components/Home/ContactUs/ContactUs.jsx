@@ -1,9 +1,9 @@
-import React from 'react';
-import './ContactUs.css';
+import React from 'react'
+import './ContactUs.css'
 
 const ContactUs = () => {
   return (
-    <div className="contactUs">
+    <div className="contactUs hidden md:block">
       <div class="background">
         <div class="container">
           <div class="screen">
@@ -61,7 +61,7 @@ const ContactUs = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ContactUs;
+export default ContactUs
