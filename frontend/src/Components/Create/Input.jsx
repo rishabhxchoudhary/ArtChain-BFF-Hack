@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Input = ({ inputType, title, placeholder, handleclick }) => {
   return (
@@ -11,6 +11,7 @@ const Input = ({ inputType, title, placeholder, handleclick }) => {
           placeholder={placeholder}
           onChange={handleclick}
           rows={10}
+          required
         />
       ) : (
         <input
@@ -18,10 +19,11 @@ const Input = ({ inputType, title, placeholder, handleclick }) => {
           placeholder={placeholder}
           onChange={handleclick}
           type={inputType}
+          required
         />
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Input;
+export default Input

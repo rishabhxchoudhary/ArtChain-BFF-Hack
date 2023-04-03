@@ -43,6 +43,15 @@ const Create = () => {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    if (
+      !formInput.nftName ||
+      !formInput.description ||
+      !formInput.yourName ||
+      !image
+    ) {
+      alert('Please fill all the fields and upload an image')
+      return
+    }
     setLoading(true)
     const client = new NFTStorage({
       token: process.env.REACT_APP_NFT_STORAGE_API,
@@ -146,7 +155,7 @@ const Create = () => {
                 onClick={handleSubmit}
                 class="group rounded-2xl h-12 w-48 bg-purple-500 font-bold text-lg text-white relative overflow-hidden"
               >
-                {loading ? 'Transaction in progress' : 'Create'}
+                {loading ? 'Busy...' : 'Create'}
                 <div class="absolute duration-300 inset-0 w-full h-full transition-all scale-0 group-hover:scale-100 group-hover:bg-white/30 rounded-2xl"></div>
               </button>
             </div>
