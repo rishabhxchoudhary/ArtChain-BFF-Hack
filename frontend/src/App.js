@@ -9,32 +9,39 @@ import Navbar from './Components/Navbar/Navbar';
 import Owned from './Components/Owned/Owned';
 import Tracker from './Components/Tracker/Tracker';
 import { useStateContext } from './Contexts/Context';
+import Profile from './Components/Profile/Profile';
 
 function App() {
   const { account } = useStateContext();
   return (
     <div className="App">
       <Navbar />
-      <div className='min-h-screen flex flex-col justify-between'>
-
+      <div className="min-h-screen flex flex-col justify-between">
         {account ? (
           <Routes>
             <Route path="/" element={<Market />} />
-            <Route path="/forsale" element={<ForSale/>} />
-            <Route path="/owned" element={<Owned/>} />
-            <Route path="/create" element={<Create/>} />
-            <Route path="/tracker" element={<Tracker/>} />
-            <Route path="*" element={<h1 className='mt-20'>Route Not Found</h1>} />
+            <Route path="/forsale" element={<ForSale />} />
+            <Route path="/owned" element={<Owned />} />
+            <Route path="/create" element={<Create />} />
+            <Route path="/tracker" element={<Tracker />} />
+            <Route path="/profile/:address" element={<Profile />} />
+            <Route
+              path="*"
+              element={<h1 className="mt-20">Route Not Found</h1>}
+            />
           </Routes>
-
-          ) : (
+        ) : (
           <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/tracker" element={<Tracker/>} />
-            <Route path="*" element={<h1 className='mt-20'>Route Not Found</h1>} />
-          </Routes>)}
-        <Footer/>
-        </div>
+            <Route path="/" element={<Home />} />
+            <Route path="/tracker" element={<Tracker />} />
+            <Route
+              path="*"
+              element={<h1 className="mt-20">Route Not Found</h1>}
+            />
+          </Routes>
+        )}
+        <Footer />
+      </div>
     </div>
   );
 }

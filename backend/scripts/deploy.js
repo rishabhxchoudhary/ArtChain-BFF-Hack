@@ -1,11 +1,10 @@
-const { ethers } = require("hardhat");
+const { ethers } = require('hardhat');
 
 async function main() {
-  const ArtChain = await ethers.getContractFactory("ArtChain");
+  const ArtChain = await ethers.getContractFactory('ArtChain');
   const artchain = await ArtChain.deploy();
   await artchain.deployed();
-  console.log("Deployed at : ",artchain.address); 
-
+  console.log('Deployed at : ', artchain.address);
 }
 
 main().catch((error) => {

@@ -1,10 +1,8 @@
-import React from 'react'
-import Card from './MarketCard'
-import art1 from '../../Assets/art.jpg'
-import art2 from '../../Assets/art2.jpg'
-import SkeletonCard from '../SkeletonCard/SkeletonCard'
-import { useStateContext } from '../../Contexts/Context'
-import { useQuery } from 'urql'
+import React from 'react';
+import Card from './MarketCard';
+import SkeletonCard from '../SkeletonCard/SkeletonCard';
+import { useStateContext } from '../../Contexts/Context';
+import { useQuery } from 'urql';
 
 const MarketQuery = (owner_address) => {
   return `
@@ -17,14 +15,14 @@ const MarketQuery = (owner_address) => {
       price
     }
   }
-`
-}
+`;
+};
 
 const Market = () => {
-  const { account } = useStateContext()
+  const { account } = useStateContext();
   const [result, reexecuteQuery] = useQuery({
     query: MarketQuery(account),
-  })
+  });
 
   return (
     <>
@@ -33,34 +31,33 @@ const Market = () => {
           <h1 className="inline-block relative">
             <span className="relative z-10">Market</span>
             <span className="absolute top-0 left-0 z-0 text-blue-400 opacity-50 blur-xl">
-                Market
+              Market
             </span>
           </h1>
         </div>
         <div className="cards flex gap-9 justify-center w-screen h-full flex-wrap p-10 lg:justify-start lg:ml-10">
-          {result.fetching &&           
-          <>
-            <SkeletonCard/>
-            <SkeletonCard/>
-            <SkeletonCard/>
-            <SkeletonCard/>
-            <SkeletonCard/>
-            <SkeletonCard/>
-            <SkeletonCard/>
-            <SkeletonCard/>
-          </>}
+          {result.fetching && (
+            <>
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+            </>
+          )}
           {result.error && <div>Some error Occured</div>}
-          {!result.fetching && !result.error && result.data.arts.map((art, index) => (
-            <Card
-              key={index}
-              art={art}
-            />
-        ))
-        }
+          {!result.fetching &&
+            !result.error &&
+            result.data.arts.map((art, index) => (
+              <Card key={index} art={art} />
+            ))}
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default Market;

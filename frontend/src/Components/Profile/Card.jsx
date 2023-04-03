@@ -1,31 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import { ethers } from 'ethers';
+import React, { useEffect, useState } from 'react';
+import { useStateContext } from '../../Contexts/Context';
+import axios from 'axios';
 
-const OwnedCard = ({ art , setSelectedNFT }) => {
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [image, setImage] = useState('')
-  const [loading, setLoading] = useState(true)
+const Card = ({ art, isOwner }) => {
+  const { contract } = useStateContext();
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [loading2, setLoading2] = useState(false);
 
   useEffect(() => {
-    const uri = 'https://dweb.link/ipfs/' + art.tokenURI.slice(7)
+    const uri = 'https://dweb.link/ipfs/' + art.tokenURI.slice(7);
     async function getUsers() {
-      setLoading(true)
+      setLoading(true);
       try {
-        const response = await fetch(uri, {
-          method: 'GET',
-        })
-        const json = await response.json()
-        setName(json.name)
-        setDescription(json.description)
-        const img_url = 'https://dweb.link/ipfs/' + json.image.slice(7)
-        setImage(img_url)
+        const response = await axios.get(uri);
+        const json = await response.data;
+        // console.log(json)
+        setName(json.name);
+        setDescription(json.description);
+        const img_url = 'https://dweb.link/ipfs/' + json.image.slice(7);
+        setImage(img_url);
       } catch (error) {
-        console.error(error)
+        console.error(error);
       }
-      setLoading(false)
+      setLoading(false);
     }
-    getUsers()
-  }, [art.tokenURI])
+    getUsers();
+  }, [art.tokenURI]);
+
+  const handleSubmit = async () => {
+    setLoading2(true);
+    try {
+      const transaction = await contract.buyArt(art.id, { value: art.price });
+      await transaction.wait();
+      alert('Art has been bought successfully');
+      window.location.reload();
+    } catch (err) {
+      alert(err.stack);
+      console.log(err);
+    }
+    setLoading2(false);
+  };
+
   return (
     <>
       {loading ? (
@@ -60,18 +79,26 @@ const OwnedCard = ({ art , setSelectedNFT }) => {
             <div className="px-6 py-4 h-[180px] overflow-scroll scrollbar-hide">
               <div className="font-bold text-xl mb-2 ">{name}</div>
               <p className="text-base mb-4">{description}</p>
+              <p className="text-base mb-4">
+                Price: {ethers.utils.formatEther(art.price)} Eth
+              </p>
             </div>
-            <div className="px-6 pt-4 pb-2">
-              <button onClick={()=>{setSelectedNFT([art.id,name,description])}} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg">
-                Sell
-              </button>
-            </div>
+            {!isOwner && (
+              <div className="px-6 pt-4 pb-2">
+                <button
+                  disabled={loading2}
+                  onClick={handleSubmit}
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:shadow-lg"
+                >
+                  {loading2 ? 'Buying..' : 'Buy'}
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
-
     </>
-  )
-}
+  );
+};
 
-export default OwnedCard
+export default Card;
